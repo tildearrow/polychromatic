@@ -1343,7 +1343,7 @@ class Controller(object):
                     except:
                         current_brightness = None
 
-                    current_effect = pref.get_device_state(device.serial, source, "effect")
+                    current_effect = device.current_effect()
                     current_colour = pref.get_device_state(device.serial, source, "colour_primary")
 
                     if current_brightness:
@@ -1664,7 +1664,7 @@ class Controller(object):
 
         if self.active_device.has("lighting"):
             try:
-                effect = pref.get_device_state(self.active_device.serial, "main", "effect")
+                effect = self.active_device.current_effect()
 
                 if effect == "profile":
                     uuid = pref.get_device_state(self.active_device.serial, "main", "profile")
@@ -1883,7 +1883,7 @@ class Controller(object):
             return
 
         device_type = common.get_device_type(self.active_device.type)
-        effect = pref.get_device_state(self.active_device.serial, "main", "effect")
+        effect = self.active_device.current_effect()
         if colour_rgb:
             red = colour_rgb[0]
             green = colour_rgb[1]
