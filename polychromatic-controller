@@ -1344,7 +1344,7 @@ class Controller(object):
                         current_brightness = None
 
                     current_effect = device.current_effect()
-                    current_colour = pref.get_device_state(device.serial, source, "colour_primary")
+                    current_colour = list(device.current_effect_colours()[0:3])
 
                     if current_brightness:
                         if len(buffer_brightness) == 0:
@@ -1467,7 +1467,7 @@ class Controller(object):
             if self.active_device.has("lighting"):
                 self.update_page("#lighting-dropdown", "show")
                 self.update_page("#lighting-list", "html", " ")
-                self.update_background_header(pref.get_device_state(self.active_device.serial, "main", "colour_primary"))
+                self.update_background_header(list(self.active_device.current_effect_colours()[0:3]))
                 fx_list = [
                     # [has() parameter, icon/command, human string]
                     ["lighting_none", "none", _("None")],
